@@ -36,10 +36,11 @@ module.exports = function (fn, options) {
     var skey = Math.floor(Math.pow(16, 8) * Math.random()).toString(16);
 
     var scache = {}; scache[wkey] = wkey;
+    var _require = 'require';
     sources[skey] = [
         'function(require,module,exports){' +
             // try to call default if defined to also support babel esmodule exports
-            'var f = require(' + stringify(wkey) + ');' +
+            'var f = ' + _require + '(' + stringify(wkey) + ');' +
             '(f.default ? f.default : f)(self);' +
         '}',
         scache
